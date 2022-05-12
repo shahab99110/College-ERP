@@ -27,7 +27,7 @@ module.exports = {
       if (!name || !email || !dob || !department || !contactNumber) {
         return res.status(400).json({
           success: false,
-          message: "Probably you have missed certain fields"
+          message: "Probably you have missed certain fields",
         });
       }
 
@@ -80,13 +80,13 @@ module.exports = {
         department,
         avatar,
         contactNumber,
-        dob
+        dob,
       });
       await newAdmin.save();
       return res.status(200).json({
         success: true,
         message: "Admin registerd successfully",
-        response: newAdmin
+        response: newAdmin,
       });
     } catch (error) {
       return res.status(400).json({ success: false, message: error.message });
@@ -135,12 +135,12 @@ module.exports = {
         avatar: admin.avatar,
         registrationNumber: admin.registrationNumber,
         joiningYear: admin.joiningYear,
-        department: admin.department
+        department: admin.department,
       };
       jwt.sign(payload, keys.secretOrKey, { expiresIn: 7200 }, (err, token) => {
         res.json({
           success: true,
-          token: "Bearer " + token
+          token: "Bearer " + token,
         });
       });
     } catch (err) {
@@ -149,6 +149,7 @@ module.exports = {
   },
   addStudent: async (req, res, next) => {
     try {
+      console.log("route me aya");
       const { errors, isValid } = validateStudentRegisterInput(req.body);
 
       if (!isValid) {
@@ -157,7 +158,7 @@ module.exports = {
       const {
         name,
         email,
-        year,
+        semister,
         fatherName,
         aadharCard,
         gender,
@@ -165,7 +166,7 @@ module.exports = {
         section,
         dob,
         studentMobileNumber,
-        fatherMobileNumber
+        fatherMobileNumber,
       } = req.body;
 
       const student = await Student.findOne({ email });
@@ -173,6 +174,7 @@ module.exports = {
         errors.email = "Email already exist";
         return res.status(400).json(errors);
       }
+      console.log("email already exit pass kiya");
       const avatar = gravatar.url(email, { s: "200", r: "pg", d: "mm" });
       let departmentHelper;
       if (department === "C.S.E") {
@@ -209,7 +211,7 @@ module.exports = {
         name,
         email,
         password: hashedPassword,
-        year,
+        semister,
         fatherName,
         aadharCard,
         gender,
@@ -220,13 +222,14 @@ module.exports = {
         avatar,
         dob,
         studentMobileNumber,
-        fatherMobileNumber
+        fatherMobileNumber,
       });
       await newStudent.save();
-      const subjects = await Subject.find({ year });
+      const subjects = await Subject.find({ semister });
       if (subjects.length !== 0) {
         for (var i = 0; i < subjects.length; i++) {
           newStudent.subjects.push(subjects[i]._id);
+          console.log(subjects[i]._id);
         }
       }
       await newStudent.save();
@@ -253,7 +256,7 @@ module.exports = {
         facultyMobileNumber,
         aadharCard,
         dob,
-        gender
+        gender,
       } = req.body;
       const faculty = await Faculty.findOne({ email });
       if (faculty) {
@@ -263,7 +266,7 @@ module.exports = {
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
         r: "pg", // Rating
-        d: "mm" // Default
+        d: "mm", // Default
       });
       let departmentHelper;
       if (department === "C.S.E") {
@@ -308,7 +311,7 @@ module.exports = {
         aadharCard,
         registrationNumber,
         dob,
-        joiningYear
+        joiningYear,
       });
       await newFaculty.save();
       res.status(200).json({ result: newFaculty });
@@ -339,13 +342,8 @@ module.exports = {
       if (!isValid) {
         return res.status(400).json(errors);
       }
-      const {
-        totalLectures,
-        department,
-        subjectCode,
-        subjectName,
-        year
-      } = req.body;
+      const { totalLectures, department, subjectCode, subjectName, semister } =
+        req.body;
       const subject = await Subject.findOne({ subjectCode });
       if (subject) {
         errors.subjectCode = "Given Subject is already added";
@@ -356,10 +354,10 @@ module.exports = {
         department,
         subjectCode,
         subjectName,
-        year
+        semister,
       });
       await newSubject.save();
-      const students = await Student.find({ department, year });
+      const students = await Student.find({ department, semister });
       if (students.length === 0) {
         errors.department = "No branch found for given subject";
         return res.status(400).json(errors);
@@ -400,8 +398,8 @@ module.exports = {
   },
   getAllStudent: async (req, res, next) => {
     try {
-      const { department, year } = req.body;
-      const allStudents = await Student.find({ department, year });
+      const { department, semister } = req.body;
+      const allStudents = await Student.find({ department, semister });
       res.status(200).json({ result: allStudents });
     } catch (err) {
       console.log("Error in gettting all students", err.message);
@@ -409,11 +407,11 @@ module.exports = {
   },
   getAllSubject: async (req, res, next) => {
     try {
-      const { department, year } = req.body;
-      const allSubjects = await Subject.find({ department, year });
+      const { department, semister } = req.body;
+      const allSubjects = await Subject.find({ department, semister });
       res.status(200).json({ result: allSubjects });
     } catch (err) {
       console.log("Error in gettting all students", err.message);
     }
-  }
+  },
 };

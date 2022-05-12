@@ -15,7 +15,8 @@ const AdminAddSubject = () => {
   const [subjectCode, setSubjectCode] = useState("");
   const [totalLectures, setTotalLectures] = useState("");
   const [department, setDepartment] = useState("");
-  const [year, setYear] = useState("");
+  //const [year, setYear] = useState("");
+  const [semister, setSemister] = useState("");
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +34,7 @@ const AdminAddSubject = () => {
         subjectName,
         totalLectures,
         department,
-        year
+        semister
       })
     );
   };
@@ -118,11 +119,7 @@ const AdminAddSubject = () => {
                         id="departmentId">
                         <option>Select</option>
                         <option value="E.C.E">E.C.E</option>
-                        <option value="E.E.E">E.E.E</option>
-                        <option value="C.S.E">C.S.E</option>
-                        <option value="I.T">I.T</option>
-                        <option value="Mechanical">Mechanical</option>
-                        <option value="Civil">Civil</option>
+                        <option value="C.S.E">C.S.E</option>                       
                       </select>
                       {error.department && (
                         <div className="invalid-feedback">
@@ -131,11 +128,11 @@ const AdminAddSubject = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="yearId">Year</label>
+                      <label htmlFor="yearId">Semister</label>
                       <select
-                        onChange={(e) => setYear(e.target.value)}
+                        onChange={(e) => setSemister(e.target.value)}
                         className={classnames("form-control", {
-                          "is-invalid": error.year
+                          "is-invalid": error.semister
                         })}
                         id="yearId">
                         <option>Select</option>
@@ -143,10 +140,14 @@ const AdminAddSubject = () => {
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
                       </select>
 
-                      {error.year && (
-                        <div className="invalid-feedback">{error.year}</div>
+                      {error.semister && (
+                        <div className="invalid-feedback">{error.semister}</div>
                       )}
                     </div>
                     <div className="row justify-content-center">

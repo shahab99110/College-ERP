@@ -378,8 +378,8 @@ module.exports = {
   },
   getAllSubjects: async (req, res, next) => {
     try {
-      const { department, year } = req.user;
-      const subjects = await Subject.find({ department, year });
+      const { department, semister } = req.user;
+      const subjects = await Subject.find({ department, semister });
       if (subjects.length === 0) {
         return res.status(404).json({ message: "No subjects founds" });
       }

@@ -57,11 +57,6 @@ const StudentSidebar = props => {
     },
     {
       icon: UilChart,
-      heading: 'STUDENT DETAILS',
-      path: '/studentDetails',
-    },
-    {
-      icon: UilChart,
       heading: 'UPDATE PASSOWRD',
       path: '/student/updatePassword',
     },

@@ -25,7 +25,7 @@ const StudentSubjectList = () => {
                       <th scope="col">S.No</th>
                       <th scope="col">Subject Code</th>
                       <th scope="col">Subject Name</th>
-                      <th scope="col">Year</th>
+                      <th scope="col">Semister</th>
                       <th scope="col">Total Lectures</th>
                     </tr>
                   </thead>
@@ -35,7 +35,7 @@ const StudentSubjectList = () => {
                         <th scope="row">{index + 1}</th>
                         <td>{res.subjectCode}</td>
                         <td>{res.subjectName}</td>
-                        <td>{res.year}</td>
+                        <td>{res.semister}</td>
                         <td>{res.totalLectures}</td>
                       </tr>
                     ))}
