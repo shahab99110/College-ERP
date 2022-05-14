@@ -7,96 +7,96 @@ import {
   SET_ERRORS,
   STUDENT_UPDATE_PASSWORD,
   SET_OTP,
-  SET_FLAG
+  SET_FLAG,
 } from "../actionTypes";
 
 const url = "http://localhost:5000";
 // const url = "https://iv4u9q-5000.sse.codesandbox.io";
 
-export const setChatHistory = (data) => {
+export const setChatHistory = data => {
   return {
     type: "SET_CHAT",
-    payload: data
+    payload: data,
   };
 };
 
-const setStudent = (data) => {
+const setStudent = data => {
   return {
     type: SET_STUDENT,
-    payload: data
+    payload: data,
   };
 };
 
-const chatHelp = (data) => {
+const chatHelp = data => {
   return {
     type: "CHAT_HELPER",
-    payload: data
+    payload: data,
   };
 };
 
-const getStudentByRegNameHelper = (data) => {
+const getStudentByRegNameHelper = data => {
   return {
     type: "GET_STUDENT_BY_REG_NUM",
-    payload: data
+    payload: data,
   };
 };
 
-const privateConversation = (data) => {
+const privateConversation = data => {
   return {
     type: "GET_PRIVATE_CONVERSATION",
-    payload: data
+    payload: data,
   };
 };
 
-const privateConversation2 = (data) => {
+const privateConversation2 = data => {
   return {
     type: "GET_PRIVATE_CONVERSATION2",
-    payload: data
+    payload: data,
   };
 };
 
-const newerChatsHelper = (data) => {
+const newerChatsHelper = data => {
   return {
     type: "GET_NEWER_CHATS",
-    payload: data
+    payload: data,
   };
 };
 
-const previousChatsHelper = (data) => {
+const previousChatsHelper = data => {
   return {
     type: "GET_PREVIOUS_CHATS",
-    payload: data
+    payload: data,
   };
 };
 
-const getAllSubjectsHelper = (data) => {
+const getAllSubjectsHelper = data => {
   return {
     type: "GET_ALL_SUBJECTS",
-    payload: data
+    payload: data,
   };
 };
 
-const fetchAttendenceHelper = (data) => {
+const fetchAttendenceHelper = data => {
   return {
     type: "GET_ATTENDENCE",
-    payload: data
+    payload: data,
   };
 };
 
-const getMarksHelper = (data) => {
+const getMarksHelper = data => {
   return {
     type: "GET_MARKS",
-    payload: data
+    payload: data,
   };
 };
 
-export const studentLogin = (studentCredential) => {
-  return async (dispatch) => {
+export const studentLogin = studentCredential => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/student/login",
-        data: studentCredential
+        data: studentCredential,
       });
       const { token } = data;
       // Set token to local Storage
@@ -110,37 +110,37 @@ export const studentLogin = (studentCredential) => {
     } catch (err) {
       dispatch({
         type: SET_ERRORS_HELPER,
-        payload: err.response.data
+        payload: err.response.data,
       });
     }
   };
 };
 
-export const studentUpdatePassword = (passwordData) => {
-  return async (dispatch) => {
+export const studentUpdatePassword = passwordData => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/student/updatePassword",
-        data: passwordData
+        data: passwordData,
       });
       alert("Password Updated Successfully");
     } catch (err) {
       dispatch({
         type: SET_ERRORS_HELPER,
-        payload: err.response.data
+        payload: err.response.data,
       });
     }
   };
 };
 
-export const chatHelper = (name) => {
-  return async (dispatch) => {
+export const chatHelper = name => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/student/getStudentByName",
-        data: name
+        data: name,
       });
       dispatch(chatHelp(data.result));
     } catch (err) {
@@ -149,13 +149,13 @@ export const chatHelper = (name) => {
   };
 };
 
-export const getStudentByRegName = (registrationNumber) => {
-  return async (dispatch) => {
+export const getStudentByRegName = registrationNumber => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/student/getStudentByRegName",
-        data: { registrationNumber }
+        data: { registrationNumber },
       });
       dispatch(getStudentByRegNameHelper(data.result));
     } catch (err) {
@@ -167,39 +167,39 @@ export const getStudentByRegName = (registrationNumber) => {
   };
 };
 
-export const getOTPStudent = (studentEmail) => {
-  return async (dispatch) => {
+export const getOTPStudent = studentEmail => {
+  return async dispatch => {
     try {
       await axios({
         method: "Post",
         url: url + "/api/student/forgotPassword",
-        data: studentEmail
+        data: studentEmail,
       });
       alert("Otp has been sent to your email");
       dispatch({ type: SET_FLAG });
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       });
     }
   };
 };
 
 export const submitOTPStudent = (newPasswordWithOtp, history) => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/student/postOTP",
-        data: newPasswordWithOtp
+        data: newPasswordWithOtp,
       });
       alert("Password Update, kindly login with updated password");
       history.push("/");
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       });
     }
   };
@@ -211,7 +211,7 @@ export const sendMessage = (room, messageobj) => {
       const { data } = await axios({
         method: "Post",
         url: url + `/api/student/chat/${room}`,
-        data: messageobj
+        data: messageobj,
       });
     } catch (err) {
       console.log("Error in sending message", err.message);
@@ -219,12 +219,12 @@ export const sendMessage = (room, messageobj) => {
   };
 };
 
-export const getPrivateConversation = (roomId) => {
-  return async (dispatch) => {
+export const getPrivateConversation = roomId => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + `/api/student/chat/${roomId}`
+        url: url + `/api/student/chat/${roomId}`,
       });
       dispatch(privateConversation(data.result));
     } catch (err) {
@@ -233,12 +233,12 @@ export const getPrivateConversation = (roomId) => {
   };
 };
 
-export const getPrivateConversation2 = (roomId) => {
-  return async (dispatch) => {
+export const getPrivateConversation2 = roomId => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + `/api/student/chat/${roomId}`
+        url: url + `/api/student/chat/${roomId}`,
       });
       dispatch(privateConversation2(data.result));
     } catch (err) {
@@ -247,12 +247,12 @@ export const getPrivateConversation2 = (roomId) => {
   };
 };
 
-export const previousChats = (senderName) => {
-  return async (dispatch) => {
+export const previousChats = senderName => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + `/api/student/chat/previousChats/${senderName}`
+        url: url + `/api/student/chat/previousChats/${senderName}`,
       });
       dispatch(previousChatsHelper(data.result));
     } catch (err) {
@@ -261,12 +261,12 @@ export const previousChats = (senderName) => {
   };
 };
 
-export const newerChats = (receiverName) => {
-  return async (dispatch) => {
+export const newerChats = receiverName => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + `/api/student/chat/newerChats/${receiverName}`
+        url: url + `/api/student/chat/newerChats/${receiverName}`,
       });
       dispatch(newerChatsHelper(data.result));
     } catch (err) {
@@ -275,13 +275,13 @@ export const newerChats = (receiverName) => {
   };
 };
 
-export const studentUpdate = (updatedData) => {
+export const studentUpdate = updatedData => {
   return async () => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + `/api/student/updateProfile`,
-        data: updatedData
+        data: updatedData,
       });
     } catch (err) {
       console.log("Error in sending message", err.message);
@@ -290,12 +290,13 @@ export const studentUpdate = (updatedData) => {
 };
 
 export const getAllSubjects = () => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + "/api/student/getAllSubjects"
+        url: url + "/api/student/getAllSubjects",
       });
+      console.log(data.result);
       dispatch(getAllSubjectsHelper(data.result));
     } catch (err) {
       console.log("Error in sending message", err.message);
@@ -304,11 +305,11 @@ export const getAllSubjects = () => {
 };
 
 export const fetchAttendence = () => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + "/api/student/checkAttendence"
+        url: url + "/api/student/checkAttendence",
       });
       dispatch(fetchAttendenceHelper(data.result));
     } catch (err) {
@@ -318,11 +319,11 @@ export const fetchAttendence = () => {
 };
 
 export const getMarks = () => {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + "/api/student/getMarks"
+        url: url + "/api/student/getMarks",
       });
       dispatch(getMarksHelper(data.result));
     } catch (err) {
@@ -331,14 +332,14 @@ export const getMarks = () => {
   };
 };
 
-export const setStudentUser = (data) => {
+export const setStudentUser = data => {
   return {
     type: SET_STUDENT,
-    payload: data
+    payload: data,
   };
 };
 
-export const studentLogout = () => (dispatch) => {
+export const studentLogout = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem("studentJwtToken");
   // Remove auth header for future requests

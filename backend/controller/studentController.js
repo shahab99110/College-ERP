@@ -2,8 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/key");
 const sendEmail = require("../utils/nodemailer");
+const mongoose = require("mongoose");
+const objectId = mongoose.Types.ObjectId;
 const Student = require("../models/student");
 const Subject = require("../models/subject");
+const Timetable = require("../models/timetable");
 const Attendence = require("../models/attendence");
 //const Message = require("../models/message");
 const Mark = require("../models/marks");
@@ -17,6 +20,8 @@ const validateStudentUpdatePassword = require("../validation/studentUpdatePasswo
 const validateForgotPassword = require("../validation/forgotPassword");
 const validateOTP = require("../validation/otpValidation");
 const { markAttendence } = require("./facultyController");
+const subject = require("../models/subject");
+//const subject = require("../models/subject");
 
 module.exports = {
   studentLogin: async (req, res, next) => {
@@ -48,6 +53,7 @@ module.exports = {
   },
   checkAttendence: async (req, res, next) => {
     try {
+      console.log(req.body);
       const studentId = req.user._id;
       const attendence = await Attendence.find({ student: studentId }).populate(
         "subject"
@@ -77,6 +83,7 @@ module.exports = {
   },
   getAllStudents: async (req, res, next) => {
     try {
+      console.log(req.body);
       const { department, year, section } = req.body;
       const students = await Student.find({ department, year, section });
       if (students.length === 0) {
@@ -89,6 +96,7 @@ module.exports = {
   },
   getStudentByName: async (req, res, next) => {
     try {
+      console.log(req.body);
       const { name } = req.body;
       const students = await Student.find({ name });
       if (students.length === 0) {
@@ -101,6 +109,7 @@ module.exports = {
   },
   updatePassword: async (req, res, next) => {
     try {
+      console.log(req.body);
       const { errors, isValid } = validateStudentUpdatePassword(req.body);
       if (!isValid) {
         return res.status(400).json(errors);
@@ -168,6 +177,7 @@ module.exports = {
   // },
   getStudentByRegName: async (req, res, next) => {
     try {
+      console.log(req.body);
       const { registrationNumber } = req.body;
       const students = await Student.findOne({ registrationNumber });
       if (!students) {
@@ -335,6 +345,7 @@ module.exports = {
   //   },
   updateProfile: async (req, res, next) => {
     try {
+      console.log(req.body);
       const {
         email,
         gender,
@@ -417,6 +428,38 @@ module.exports = {
       });
     } catch (err) {
       return res.status(400).json({ "Error in getting marks": err.message });
+    }
+  },
+  getStudentTimetable: async (req, res, next) => {
+    try {
+      const { department, semister } = req.user;
+      const subjectTimetable = await Subject.find({
+        department,
+        semister,
+        timetable: { $exists: true },
+      });
+      console.log(subjectTimetable.length);
+      if (subjectTimetable.length === 0) {
+        //console.log("andar aya");
+        const subjects = await Subject.find({ department, semister });
+        const timetable = await Timetable.find({});
+        for (let i = 0; i < subjects.length; i++) {
+          for (let j = 0; j < timetable.length; j++) {
+            if (timetable[i].subjectCode == subjects[j].subjectCode) {
+              //console.log(subjects[0]);
+              subjects[i].timetable = objectId(timetable[i]._id);
+              await subjects[i].save();
+            }
+          }
+        }
+        //console.log(subjects);
+        res.status(200).json({ result: subjects });
+      } else {
+        console.log("subjecttimetable hae");
+        res.json({ message: "subject ke andar timetable hae" });
+      }
+    } catch (err) {
+      console.error("error in getting timetable because ", err);
     }
   },
 };

@@ -12,15 +12,14 @@ import HomeHelper from "../../Components/HomeHelper";
 
 import StudentAttendencePage from "./StudentAttendencePage";
 import StudentUpdatePassword from "./StudentUpdatePassword";
-import Chat from "./Chat";
+//import Chat from "./Chat";
 import RecieverUserDetails from "./RecieverUserDetails";
 import StudentUpdateProfile from "./StudentUpdateProfile";
 import StudentDetails from "./StudentDetails";
 import StudentHome from "./StudentHome";
-
 import StudentSubjectList from "./StudentSubjectList";
-
 import StudentTestPerformace from "./StudentTestPerformance";
+
 const StudentRoutes = () => {
   const store = useSelector((store) => store);
 

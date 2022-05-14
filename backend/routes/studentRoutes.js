@@ -19,6 +19,7 @@ const {
   updateProfile,
   getAllSubjects,
   getMarks,
+  getStudentTimetable,
 } = require("../controller/studentController");
 
 router.post("/login", studentLogin);
@@ -88,4 +89,9 @@ router.post(
   getStudentByName
 );
 
+router.get(
+  "/getStudentTimeTable",
+  passport.authenticate("jwt", { session: false }),
+  getStudentTimetable
+);
 module.exports = router;

@@ -398,6 +398,7 @@ module.exports = {
   },
   getAllStudent: async (req, res, next) => {
     try {
+      console.log(req.body);
       const { department, semister } = req.body;
       const allStudents = await Student.find({ department, semister });
       res.status(200).json({ result: allStudents });

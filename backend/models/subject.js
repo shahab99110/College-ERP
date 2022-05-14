@@ -21,7 +21,6 @@ const subjectSchema = new Schema({
   },
   year: {
     type: String,
-    required: true,
   },
   semister: {
     type: Number,
@@ -29,6 +28,9 @@ const subjectSchema = new Schema({
   attendence: {
     type: Schema.Types.ObjectId,
     ref: "attendence",
+  },
+  timetable: {
+    type: Schema.Types.ObjectId,
   },
 });
 

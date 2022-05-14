@@ -30,6 +30,12 @@ const studentSchema = new Schema({
       ref: "subject",
     },
   ],
+  timetable: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "timetable",
+    },
+  ],
   fatherName: {
     type: String,
   },
