@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./redux/utils/setAuthToken";
@@ -15,7 +15,7 @@ import { setFacultyUser, facultyLogout } from "./redux/action/facultyAction";
 import {
   setAdminUser,
   adminLogout,
-  adminGetAllStudent
+  adminGetAllStudent,
 } from "./redux/action/adminAction";
 
 import { setStudentUser, studentLogout } from "./redux/action/studentAction";
@@ -61,6 +61,8 @@ import Chat from "./Pages/Student/Chat";
 import RecieverUserDetails from "./Pages/Student/RecieverUserDetails";
 import StudentUpdateProfile from "./Pages/Student/StudentUpdateProfile";
 import StudentSubjectList from "./Pages/Student/StudentSubjectList";
+import StudentFees from "./Pages/Student/StudentFees";
+
 import StudentTestPerformace from "./Pages/Student/StudentTestPerformance";
 
 import ForgotPassword from "./Pages/ForgotPassword";
@@ -105,12 +107,10 @@ if (window.localStorage.facultyJwtToken) {
 }
 
 function App() {
-  const store = useSelector((store) => store);
+  const store = useSelector(store => store);
   return (
     <div className="App">
       <Router>
-
-
         <Routes>
           {/* <Route exact path="/" element={<FacultyStudentLoginPage />} /> */}
           <Route exact path="/" element={<FacultyStudentLogin />} />
@@ -126,30 +126,30 @@ function App() {
         </Routes>
         {store.admin.isAuthenticated && (
           <div className="AppGlass">
-            <AdminSidebar/>
-          <div className="MainDash">
-            {/* <AdminHomeHelper /> */}
-            <Routes>
-              <Route path="/admin" element={<AdminHome />} />
-              <Route path="/admin/addStudent" element={<AdminAddStudent />} />
-              <Route path="/admin/addFaculty" element={<AdminAddFaculty />} />
-              <Route path="/admin/addSubject" element={<AdminAddSubject />} />
-              <Route path="/admin/addAdmin" element={<AdminAddAdmin />} />
-              <Route
-                path="/admin/allFaculties"
-                element={<AdminGetAllFaculties />}
-              />
-              <Route
-                path="/admin/allStudents"
-                element={<AdminGetAllStudents />}
-              />
-              <Route
-                path="/admin/allSubjects"
-                element={<AdminGetAllSubjects />}
-              />
-              <Route path="/*" element={<Navigate replace to="/admin" />} />
-            </Routes>
-          </div>
+            <AdminSidebar />
+            <div className="MainDash">
+              {/* <AdminHomeHelper /> */}
+              <Routes>
+                <Route path="/admin" element={<AdminHome />} />
+                <Route path="/admin/addStudent" element={<AdminAddStudent />} />
+                <Route path="/admin/addFaculty" element={<AdminAddFaculty />} />
+                <Route path="/admin/addSubject" element={<AdminAddSubject />} />
+                <Route path="/admin/addAdmin" element={<AdminAddAdmin />} />
+                <Route
+                  path="/admin/allFaculties"
+                  element={<AdminGetAllFaculties />}
+                />
+                <Route
+                  path="/admin/allStudents"
+                  element={<AdminGetAllStudents />}
+                />
+                <Route
+                  path="/admin/allSubjects"
+                  element={<AdminGetAllSubjects />}
+                />
+                <Route path="/*" element={<Navigate replace to="/admin" />} />
+              </Routes>
+            </div>
           </div>
         )}
         {store.faculty.isAuthenticated && (
@@ -157,27 +157,27 @@ function App() {
             <FacultySidebar />
 
             <div className="MainDash">
-            {/* <FacultyHomeHelper /> */}
-            <Routes>
-              <Route path="/faculty" element={<FacultyHome />} />
-              <Route
-                path="/faculty/updatePassword"
-                element={<FacultyUpdatePassword />}
-              />
-              <Route
-                path="/faculty/uploadMarks"
-                element={<FacultyUploadMarks />}
-              />
-              <Route
-                path="/faculty/updateProfile"
-                element={<FacultyUpdateProfile />}
-              />
-              <Route
-                path="/attendenceFaculty"
-                element={<AttendenceFaculty />}
-              />
-              <Route path="/*" element={<Navigate replace to="/faculty" />} />
-            </Routes>
+              {/* <FacultyHomeHelper /> */}
+              <Routes>
+                <Route path="/faculty" element={<FacultyHome />} />
+                <Route
+                  path="/faculty/updatePassword"
+                  element={<FacultyUpdatePassword />}
+                />
+                <Route
+                  path="/faculty/uploadMarks"
+                  element={<FacultyUploadMarks />}
+                />
+                <Route
+                  path="/faculty/updateProfile"
+                  element={<FacultyUpdateProfile />}
+                />
+                <Route
+                  path="/attendenceFaculty"
+                  element={<AttendenceFaculty />}
+                />
+                <Route path="/*" element={<Navigate replace to="/faculty" />} />
+              </Routes>
             </div>
           </div>
         )}
@@ -186,42 +186,43 @@ function App() {
             <StudentSidebar />
 
             <div className="MainDash">
+              {/* <HomeHelper /> */}
+              <Routes>
+                <Route path="/student" element={<StudentHome />} />
+                <Route
+                  path="/student/updateProfile"
+                  element={<StudentUpdateProfile />}
+                />
+                <Route path="/studentDetails" element={<StudentDetails />} />
+                <Route
+                  path="/student/attendence"
+                  element={<StudentAttendencePage />}
+                />
+                <Route
+                  path="/student/updatePassword"
+                  element={<StudentUpdatePassword />}
+                />
+                <Route
+                  path="/student/testPerformance"
+                  element={<StudentTestPerformace />}
+                />
+                <Route
+                  path="/student/getAllSubjects"
+                  element={<StudentSubjectList />}
+                />
+                <Route
+                  path="/student/getStudentFees"
+                  element={<StudentFees />}
+                />
 
-            {/* <HomeHelper /> */}
-            <Routes>
-              <Route path="/student" element={<StudentHome />} />
-
-              <Route
-                path="/student/updateProfile"
-                element={<StudentUpdateProfile />}
-              />
-              <Route path="/studentDetails" element={<StudentDetails />} />
-
-              <Route
-                path="/student/attendence"
-                element={<StudentAttendencePage />}
-              />
-              <Route
-                path="/student/updatePassword"
-                element={<StudentUpdatePassword />}
-              />
-              <Route
-                path="/student/testPerformance"
-                element={<StudentTestPerformace />}
-              />
-
-              <Route
-                path="/student/getAllSubjects"
-                element={<StudentSubjectList />}
-              />
-              <Route path="/chat/:room" element={<Chat />} />
-              <Route
-                path="/student/:registrationNumber"
-                element={<RecieverUserDetails />}
-              />
-              <Route path="/*" element={<Navigate replace to="/student" />} />
-            </Routes>
-          </div>
+                <Route path="/chat/:room" element={<Chat />} />
+                <Route
+                  path="/student/:registrationNumber"
+                  element={<RecieverUserDetails />}
+                />
+                <Route path="/*" element={<Navigate replace to="/student" />} />
+              </Routes>
+            </div>
           </div>
         )}
       </Router>

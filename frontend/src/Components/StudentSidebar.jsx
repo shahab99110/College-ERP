@@ -51,6 +51,11 @@ const StudentSidebar = props => {
       path: '/student/testPerformance',
     },
     {
+      icon: UilPackage,
+      heading: 'FEES',
+      path: '/student/getStudentFees',
+    },
+    {
       icon: UilChart,
       heading: 'STUDENT SUBJECT LIST',
       path: '/student/getAllSubjects',

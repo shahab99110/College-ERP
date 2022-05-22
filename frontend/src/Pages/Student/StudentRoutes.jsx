@@ -18,6 +18,7 @@ import StudentUpdateProfile from "./StudentUpdateProfile";
 import StudentDetails from "./StudentDetails";
 import StudentHome from "./StudentHome";
 import StudentSubjectList from "./StudentSubjectList";
+import StudentFees from "./StudentFees";
 import StudentTestPerformace from "./StudentTestPerformance";
 
 const StudentRoutes = () => {

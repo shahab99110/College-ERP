@@ -339,6 +339,14 @@ export const setStudentUser = data => {
   };
 };
 
+export const getStudentFees = () => {
+  return async dispatch => {
+    try {
+    } catch (err) {
+      console.log("Error in sending message", err.message);
+    }
+  };
+};
 export const studentLogout = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem("studentJwtToken");
