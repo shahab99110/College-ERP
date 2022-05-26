@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const StudentSubjectList = () => {
   const store = useSelector((store) => store);
+  console.log("this is store "+store);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {

@@ -56,6 +56,10 @@ const StudentRoutes = () => {
               path="/student/getAllSubjects"
               element={<StudentSubjectList />}
             />
+             <Route
+                  path="/student/getStudentFees"
+                  element={<StudentFees />}
+                />
 
             <Route path="/chat/:room" element={<Chat />} />
             <Route

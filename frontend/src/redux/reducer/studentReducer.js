@@ -15,7 +15,8 @@ const initialState = {
   previousChats: [],
   allSubjects: [],
   attendence: [],
-  allMarks: {}
+  allMarks: {},
+  fees: []
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -88,6 +89,12 @@ const studentReducer = (state = initialState, action) => {
         ...state,
         allMarks: action.payload
       };
+
+    case "GET_FEES_STATUS":
+      return{
+        ...state,
+        fees: action.payload
+      }; 
 
     default:
       return state;

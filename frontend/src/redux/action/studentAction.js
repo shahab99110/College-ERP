@@ -90,6 +90,13 @@ const getMarksHelper = data => {
   };
 };
 
+const getStudentFeesHelper=data=>{
+  return{
+    type:"GET_FEES_STATUS",
+    payload: data,
+  }
+}
+
 export const studentLogin = studentCredential => {
   return async dispatch => {
     try {
@@ -296,7 +303,7 @@ export const getAllSubjects = () => {
         method: "Get",
         url: url + "/api/student/getAllSubjects",
       });
-      console.log(data.result);
+      console.log("this is dataResult "+ data.result);
       dispatch(getAllSubjectsHelper(data.result));
     } catch (err) {
       console.log("Error in sending message", err.message);
@@ -340,19 +347,23 @@ export const setStudentUser = data => {
 };
 
 export const getStudentFees = () => {
+  console.log("getstudentlist me aya")
   return async dispatch => {
     try {
-      const { data } = await axios({
-        method: "post",
-        url: url + "/api/student/razorpay",
+      const {data}  = await axios({
+        method: "get",
+        url: url + "/api/student/razorpayVerify",
       });
-      //console.log(data.result);
-      dispatch(getAllSubjectsHelper(data.result));
+      console.log("this is data of FE")
+      console.log(data);
+      dispatch(getStudentFeesHelper(data.result));
     } catch (err) {
       console.log("Error in sending message", err.message);
     }
   };
 };
+
+
 export const studentLogout = () => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem("studentJwtToken");
