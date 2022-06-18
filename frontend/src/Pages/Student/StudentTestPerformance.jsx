@@ -22,7 +22,7 @@ const StudentTestPerformance = () => {
           <div className="container">
             {store.student.allMarks.CycleTest1 && (
               <div className="row mt-3">
-                <div className="col-md-8 m-auto">
+                <div className="col-md-10 m-auto">
                   {store.student.allMarks.CycleTest1.length !== 0 ? (
                     <>
                       <h4>Cycle Test 1</h4>
@@ -60,11 +60,11 @@ const StudentTestPerformance = () => {
 
             {store.student.allMarks.CycleTest2 && (
               <div className="row mt-3">
-                <div className="col-md-8 m-auto">
+                <div className="col-md-10 m-auto">
                   {store.student.allMarks.CycleTest2.length !== 0 ? (
                     <>
                       <h4>Cycle Test 2</h4>
-                      <table className="table">
+                      <table className="table border">
                         <thead>
                           <tr>
                             <th scope="col">S.No</th>
@@ -98,11 +98,11 @@ const StudentTestPerformance = () => {
 
             {store.student.allMarks.Semester && (
               <div className="row mt-3">
-                <div className="col-md-8 m-auto">
+                <div className="col-md-10 m-auto">
                   {store.student.allMarks.Semester.length !== 0 ? (
                     <>
                       <h4>Semester</h4>
-                      <table className="table">
+                      <table className="table border">
                         <thead>
                           <tr>
                             <th scope="col">S.No</th>

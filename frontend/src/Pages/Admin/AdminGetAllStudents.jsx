@@ -106,6 +106,7 @@ const AdminGetAllFaculty = () => {
                         <th scope='col'>Name</th>
                         <th scope='col'>Email</th>
                         <th scope='col'>Section</th>
+                        <th scope='col'>Semister Fees</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -116,6 +117,7 @@ const AdminGetAllFaculty = () => {
                           <td>{res.name}</td>
                           <td>{res.email}</td>
                           <td>{res.section}</td>
+                          <td>{res.isCurrentSemFeesPaid}</td>
                         </tr>
                       ))}
                     </tbody>

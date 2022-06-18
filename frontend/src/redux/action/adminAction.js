@@ -150,6 +150,20 @@ export const adminAddStudent = (studentCredential) => {
   };
 };
 
+export const adminUpdate = updatedData => {
+  return async () => {
+    try {
+      const { data } = await axios({
+        method: "Post",
+        url: url + `/api/admin/updateProfile`,
+        data: updatedData,
+      });
+    } catch (err) {
+      console.log("Error in sending message", err.message);
+    }
+  };
+};
+
 export const adminAddSubject = (subjectCredential) => {
   return async (dispatch) => {
     try {

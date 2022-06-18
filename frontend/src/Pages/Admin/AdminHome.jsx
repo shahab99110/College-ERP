@@ -30,7 +30,7 @@ const AdminHome = () => {
                         <h5 className="card-title">
                           {store.admin.admin.registrationNumber}
                         </h5>
-                        {/* <Link to='/faculty/updateProfile'>UPDATE PROFILE</Link> */}
+                        {/* { <Link to='/admin/updateProfile'>UPDATE PROFILE</Link>} */}
                       </div>
                     </div>
                   </div>

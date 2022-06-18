@@ -60,7 +60,7 @@ const AdminGetAllSubjects = () => {
                     <select
                       onChange={e => setSemister(e.target.value)}
                       className={classnames('form-control', {
-                        'is-invalid': error.Semister,
+                        'is-invalid': error.semister,
                       })}
                       id='yearId'>
                       <option>Select</option>

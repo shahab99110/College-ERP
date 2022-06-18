@@ -10,7 +10,7 @@ const FacultyUploadMarks = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [department, setDepartment] = useState("");
-  const [year, setYear] = useState("");
+  const [semister, setSemister] = useState("");
   const [marks, setMarks] = useState([]);
   const [section, setSection] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
@@ -45,7 +45,7 @@ const FacultyUploadMarks = () => {
   const formHandler = (e) => {
     e.preventDefault();
 
-    dispatch(fetchStudents(department, year, section));
+    dispatch(fetchStudents(department, semister, section));
   };
 
   const secondFormHandler = (e) => {
@@ -86,11 +86,11 @@ const FacultyUploadMarks = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="yearId">Year</label>
+                      <label htmlFor="yearId">semister</label>
                       <select
-                        onChange={(e) => setYear(e.target.value)}
+                        onChange={(e) => setSemister(e.target.value)}
                         className={classnames("form-control", {
-                          "is-invalid": error.year
+                          "is-invalid": error.semister
                         })}
                         id="yearId">
                         <option>Select</option>
@@ -98,10 +98,14 @@ const FacultyUploadMarks = () => {
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="4">8</option>
                       </select>
 
-                      {error.year && (
-                        <div classNameName="invalid-feedback">{error.year}</div>
+                      {error.semister && (
+                        <div classNameName="invalid-feedback">{error.semister}</div>
                       )}
                     </div>
                     {/* <div className="form-group">
@@ -134,10 +138,6 @@ const FacultyUploadMarks = () => {
                         <option>Select</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
                       </select>
                       {error.section && (
                         <div classNameName="invalid-feedback">

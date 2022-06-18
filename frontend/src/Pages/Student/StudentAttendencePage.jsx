@@ -22,17 +22,17 @@ const Home = () => {
           {/* <HomeHelper /> */}
           <div className="container">
             <div className="row mt-5">
-              <div className="col-md-6 m-auto">
+              <div className="col-md-10 m-auto">
                 <table className="table border">
                   <thead>
                     <tr>
                       <th scope="col">S.No</th>
                       <th scope="col">Subject Code</th>
                       <th scope="col">Subject Name</th>
-                      <th scope="col">Maximum Hours</th>
-                      <th scope="col">Present Hours</th>
-                      <th scope="col">Absent Hours</th>
-                      <th scope="col">Total Hours</th>
+                      {/* <th scope="col">Maximum Hours</th> */}
+                      <th scope="col">Lecture Attended</th>
+                      {/* <th scope="col">Absent Hours</th> */}
+                      <th scope="col">Total Lectures</th>
                       <th scope="col">Attendence</th>
                     </tr>
                   </thead>
@@ -42,9 +42,9 @@ const Home = () => {
                         <th scope="row">{index + 1}</th>
                         <td>{res.subjectCode}</td>
                         <td>{res.subjectName}</td>
-                        <td>{res.maxHours}</td>
+                        {/* <td>{res.maxHours}</td> */}
                         <td>{res.lectureAttended}</td>
-                        <td>{res.absentHours}</td>
+                        {/* <td>{res.absentHours}</td> */}
                         <td>{res.totalLecturesByFaculty}</td>
                         <td>{res.attendence}%</td>
                       </tr>

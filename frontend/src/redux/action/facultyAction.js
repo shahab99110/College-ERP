@@ -114,13 +114,13 @@ export const submitOTPFaculty = (newPasswordWithOtp, history) => {
   };
 };
 
-export const fetchStudents = (department, year, section) => {
+export const fetchStudents = (department, semister, section) => {
   return async (dispatch) => {
     try {
       const { data } = await axios({
         method: "Post",
         url: url + "/api/faculty/fetchStudents",
-        data: { department, year, section }
+        data: { department, semister, section }
       });
       dispatch(fetchStudentsHelper(data.result));
       dispatch(subjectCodeListHelper(data.subjectCode));
@@ -159,7 +159,7 @@ export const markAttendence = (
   selectedStudents,
   subjectCode,
   department,
-  year,
+  semister,
   section
 ) => {
   return async (dispatch) => {
@@ -167,7 +167,7 @@ export const markAttendence = (
       await axios({
         method: "Post",
         url: url + "/api/faculty/markAttendence",
-        data: { selectedStudents, subjectCode, department, year, section }
+        data: { selectedStudents, subjectCode, department, semister, section }
       });
       alert("attendence has been marked successfully");
       dispatch({
@@ -186,7 +186,7 @@ export const uploadMarks = (
   totalMarks,
   marks,
   department,
-  year,
+  semister,
   section
 ) => {
   return async (dispatch) => {
@@ -200,7 +200,7 @@ export const uploadMarks = (
           totalMarks,
           marks,
           department,
-          year,
+          semister,
           section
         }
       });

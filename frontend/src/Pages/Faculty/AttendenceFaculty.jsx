@@ -13,7 +13,7 @@ const AttendenceFaculty = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [department, setDepartment] = useState("");
-  const [year, setYear] = useState("");
+  const [semister, setSemister] = useState("");
   const [section, setSection] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
   const [checkedValue, setCheckedValue] = useState([]);
@@ -43,7 +43,7 @@ const AttendenceFaculty = () => {
   const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    dispatch(fetchStudents(department, year, section));
+    dispatch(fetchStudents(department, semister, section));
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const AttendenceFaculty = () => {
     e.preventDefault();
     setIsLoading2(true);
     dispatch(
-      markAttendence(checkedValue, subjectCode, department, year, section)
+      markAttendence(checkedValue, subjectCode, department, semister, section)
     );
     setCheckedValue([]);
   };
@@ -98,22 +98,26 @@ const AttendenceFaculty = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="yearId">Year</label>
+                      <label htmlFor="yearId">Semister</label>
                       <select
-                        onChange={(e) => setYear(e.target.value)}
+                        onChange={(e) => setSemister(e.target.value)}
                         className={classnames("form-control", {
-                          "is-invalid": error.year
+                          "is-invalid": error.semister
                         })}
-                        id="yearId">
+                        id="yeard">
                         <option>Select</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
                       </select>
 
-                      {error.year && (
-                        <div classNameName="invalid-feedback">{error.year}</div>
+                      {error.semister && (
+                        <div classNameName="invalid-feedback">{error.semister}</div>
                       )}
                     </div>
 
@@ -128,10 +132,6 @@ const AttendenceFaculty = () => {
                         <option>Select</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
                       </select>
                       {error.section && (
                         <div classNameName="invalid-feedback">
